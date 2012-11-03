@@ -18,6 +18,9 @@ bin/flash/haxe
 bin/html5/web
 bin/webos
 bin/html5
+
+!bin/
+
 tmp/
 *.tmp
 *.bak
