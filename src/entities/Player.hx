@@ -16,6 +16,7 @@ class Player extends Entity
 {
 		
 	private var flip:Bool;
+	private var change_color:Bool;
 	private var velocityX:Float;
 	private var velocityY:Float;
     private var sprite:Spritemap;
@@ -24,10 +25,11 @@ class Player extends Entity
 	{
 		super(x, y);
 		
-		sprite = new Spritemap( "gfx/swordguy.png", 48, 32 );
+		sprite = new Spritemap( "gfx/swordguy2.png", 48, 32 );
 		
 		sprite.add( "stand", [0, 1, 2, 3, 4, 5], 10, true );
 		sprite.add( "run", [6, 7, 8, 9, 10, 11], 20, true );
+		sprite.add( "color_change", [12, 13, 14, 15, 16, 17], 10, true );
 		
 		graphic = sprite;
 		
@@ -36,9 +38,12 @@ class Player extends Entity
         Input.define("right", [Key.RIGHT, Key.D]);
 		Input.define("up", [Key.UP, Key.W]);
         Input.define("down", [Key.DOWN, Key.S]);
+		Input.define("change_color", [Key.SPACE]);
 		
 		velocityX = 0;
 		velocityY = 0;
+		
+		change_color = false;
 	}
 	
 	// set velocity based on keyboard input
@@ -70,19 +75,33 @@ class Player extends Entity
 		{
 			velocityY = 4;
 		}
+		
+		if (Input.check("change_color"))
+		{
+			change_color = true;
+		}
+		else
+		{
+			change_color = false;
+		}
+		
     }
 	
 	//Set the animation based on 
 	private function setAnimations()
     {
-        if (velocityX == 0 && velocityY == 0)
+        if ( !change_color && velocityX == 0 && velocityY == 0)
         {
             sprite.play("stand");
         }
-        else
+        else if ( !change_color )
         {
             sprite.play("run");
         }
+		else if ( change_color )
+		{
+			sprite.play("color_change");
+		}
 		
 		if (/*velocityX < 0*/ flip) 
 		{
