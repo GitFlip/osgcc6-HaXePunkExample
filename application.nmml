@@ -3,10 +3,10 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="Haxepunk2" package="com.cap.Haxepunk2" version="1.0.0" company="ValiumKnight" />
+	<meta title="HaxePunkTemplate" package="com.cap.HaxePunkTemplate" version="1.0.0" company="ValiumKnight" />
 
 	<!-- output -->
-	<app main="Main" file="Haxepunk2" path="bin" />
+	<app main="Main" file="HaxePunkTemplate" path="bin" />
 
 	<window background="#333333" fps="60" />
 	<window width="640" height="480" unless="mobile" />

@@ -6,6 +6,18 @@
 .project
 .metadata
 
+*.cpp
+*.obj
+*.dll
+
+bin/cpp/windows/bin/gfx/
+bin/cpp/windows/bin/font/
+bin/cpp/windows/haxe/
+bin/cpp/windows/obj/
+bin/flash/haxe
+bin/html5/web
+bin/webos
+bin/html5
 tmp/
 *.tmp
 *.bak
@@ -136,7 +148,6 @@ Desktop.ini
 # Packages
 *.egg
 *.egg-info
-bin
 dist
 build
 eggs
