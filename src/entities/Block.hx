@@ -12,12 +12,19 @@ import com.haxepunk.utils.Key;
 
 class Block extends Entity
 {
+    private var _sprite: Image;
 
 	public function new(x:Int, y:Int) 
 	{
 		super(x, y);
+        
+        _sprite = new Image("gfx/block.png");
 		
-		graphic = new Image("gfx/block.png");
+		graphic = _sprite;
+        
+        type = CollisionType.STATIC_SOLID;
+        
+        setHitbox( _sprite.width, _sprite.height );
 	}
 	
 	public override function update()

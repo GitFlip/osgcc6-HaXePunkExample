@@ -44,6 +44,10 @@ class Player extends Entity
 		velocityY = 0;
 		
 		change_color = false;
+        
+        type = CollisionType.PLAYER;
+        
+        setHitbox(48, 32);
 	}
 	
 	// set velocity based on keyboard input
@@ -75,9 +79,10 @@ class Player extends Entity
 		{
 			velocityY = 4;
 		}
-		
+        
 		if (Input.check("change_color"))
 		{
+            trace( "change" );
 			change_color = true;
 		}
 		else
@@ -117,13 +122,19 @@ class Player extends Entity
 	
 	public override function update()
     {
+        super.update();
+        
 		handleInput();
  
         moveBy(velocityX, velocityY);
- 
+        
+        if ( collide( CollisionType.STATIC_SOLID, x, y ) != null )
+        {
+            trace( "collide" );
+            change_color = true;
+        }
+        
         setAnimations();
- 
-        super.update();
     }
 	
 

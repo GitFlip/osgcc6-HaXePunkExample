@@ -1,10 +1,14 @@
 package worlds;
 
 import com.haxepunk.Entity;
+import com.haxepunk.tmx.TmxEntity;
 import com.haxepunk.World;
 import com.haxepunk.graphics.Image;
 import entities.Block;
 import entities.Player;
+import entities.CollisionType;
+import com.haxepunk.masks.Polygon;
+import flash.geom.Point;
 
 /**
  * ...
@@ -13,7 +17,6 @@ import entities.Player;
 
 class GameWorld extends World
 {
-
 	public function new() 
 	{
 		super ();
@@ -21,10 +24,23 @@ class GameWorld extends World
 	
 	public override function begin()
 	{
-		add(new Block(30, 100)); //This block is just a test. It doesn't do anything yet
-		add(new Player(30, 50));
+		add( new Block( 200, 100 ) );
+		add( new Player( 50, 50 ) );
+        
+        createMap( );
 	}
 	
-	
-	private var block:Entity;
+    public function createMap( )
+    {
+      // create the map, set the assets in your nmml file to bytes
+      var e = new TmxEntity("maps/map01.tmx");
+
+      // load layers named bottom, main, top with the appropriate tileset
+      e.loadGraphic("gfx/tiles.png", ["main"]);
+
+      // loads a grid layer named collision and sets the entity type to walls
+      e.loadMask( "main", CollisionType.STATIC_SOLID );
+
+      add(e);
+    }
 }

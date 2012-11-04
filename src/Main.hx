@@ -27,7 +27,7 @@ class Main extends Engine
 		}
 #end
 		HXP.screen.color = kClearColor;
-		HXP.screen.scale = 1;
+		HXP.screen.scale = 2;
 		HXP.world = new GameWorld();
 	}
 

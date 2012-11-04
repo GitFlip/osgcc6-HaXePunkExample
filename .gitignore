@@ -10,16 +10,7 @@
 *.obj
 *.dll
 
-bin/cpp/windows/bin/
-!bin/cpp/windows/bin/*.exe
-bin/cpp/windows/bin/gfx/
-bin/cpp/windows/bin/font/
-bin/cpp/windows/haxe/
-bin/cpp/windows/obj/
-bin/flash/haxe
-bin/html5/web
-bin/webos
-bin/html5
+bin/
 
 # Mac crap
 .DS_Store
