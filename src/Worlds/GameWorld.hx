@@ -7,13 +7,6 @@ import com.haxepunk.graphics.Image;
 import entities.Block;
 import entities.Player;
 import entities.CollisionType;
-import com.haxepunk.masks.Polygon;
-import flash.geom.Point;
-
-/**
- * ...
- * @author Rob Filippi
- */
 
 class GameWorld extends World
 {
