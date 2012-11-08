@@ -2,35 +2,27 @@ package entities;
 
 import com.haxepunk.HXP;
 import com.haxepunk.Entity;
-import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.matttuttle.PhysicsEntity;
 
-/**
- * ...
- * @author Rob Filippi
- */
-
-class Player extends Entity
+class Player extends PhysicsEntity
 {
-		
-	private var flip:Bool;
-	private var change_color:Bool;
-	private var velocityX:Float;
-	private var velocityY:Float;
+	private var flip:Bool = false;
     private var sprite:Spritemap;
+    private var scaleFactor:Float = 0.5;
 
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
 		
 		sprite = new Spritemap( "gfx/swordguy2.png", 48, 32 );
-		
-		sprite.add( "stand", [0, 1, 2, 3, 4, 5], 10, true );
+        
+		sprite.add( "stand", [0, 1, 2, 3, 4, 5], 10, true );               
 		sprite.add( "run", [6, 7, 8, 9, 10, 11], 20, true );
-		sprite.add( "color_change", [12, 13, 14, 15, 16, 17], 10, true );
+        
+        sprite.scale = scaleFactor;
 		
 		graphic = sprite;
 		
@@ -41,102 +33,60 @@ class Player extends Entity
         Input.define("down", [Key.DOWN, Key.S]);
 		Input.define("change_color", [Key.SPACE]);
 		
-		velocityX = 0;
-		velocityY = 0;
-		
-		change_color = false;
+		gravity.y = 0.5;
+        maxVelocity.y = 12;
+        maxVelocity.x = 1.5;
+        friction.x = 1;
+        friction.y = 0;
         
         type = CollisionType.PLAYER;
         
-        setHitbox(48, 32);
+        setHitbox( Std.int( sprite.width * scaleFactor ), Std.int( sprite.height * scaleFactor ) );
 	}
 	
 	// set velocity based on keyboard input
     private function handleInput()
     {
-        velocityX = 0;
-		velocityY = 0;
- 
-        if (Input.check("left"))
+        if ( Input.check("left") )
         {
 			flip = true;
-			//sprite.flipped = true;	//Moved to setAnimations. Thoughts?
-            velocityX = -4;
+            acceleration.x = -maxVelocity.x;
         }
  
-        if (Input.check("right"))
+        if ( Input.check("right") )
         {
 			flip = false;
-			//sprite.flipped = false;   //Moved to setAnimations. Thoughts?
-            velocityX = 4;
-        }
+            acceleration.x = maxVelocity.x;
+        }        
 		
-		if (Input.check("up"))
-		{
-			velocityY = -4;
+		if ( Input.check("up") && onGround( ) )
+		{            
+            acceleration.y = -gravity.y * maxVelocity.y;
 		}
-		
-		if (Input.check("down"))
-		{
-			velocityY = 4;
-		}
-        
-		if (Input.check("change_color"))
-		{
-            trace( "change" );
-			change_color = true;
-		}
-		else
-		{
-			change_color = false;
-		}
-		
     }
 	
 	//Set the animation based on 
 	private function setAnimations()
     {
-        if ( !change_color && velocityX == 0 && velocityY == 0)
+        // Value > 3, keeps sprite standing still
+        if ( Math.abs( velocity.x ) < 0.3 && onGround( ) )
         {
             sprite.play("stand");
         }
-        else if ( !change_color )
+        else
         {
             sprite.play("run");
         }
-		else if ( change_color )
-		{
-			sprite.play("color_change");
-		}
-		
-		if (/*velocityX < 0*/ flip) 
-		{
-			//left
-			sprite.flipped = true;
-		}
-		else 
-		{
-			//right
-			sprite.flipped = false;
-		}
+        
+        sprite.flipped = flip;
     }
 	
 	public override function update()
-    {
+    {   
         super.update();
         
 		handleInput();
- 
-        moveBy(velocityX, velocityY);
         
-        if ( collide( CollisionType.STATIC_SOLID, x, y ) != null )
-        {
-            trace( "collide" );
-            change_color = true;
-        }
-        
-        setAnimations();
+        setAnimations( );
     }
-	
-
 }

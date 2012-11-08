@@ -7,6 +7,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import entities.CollisionType;
 
 class PhysicsEntity extends Entity
 {
@@ -16,21 +17,23 @@ class PhysicsEntity extends Entity
 	public var friction:Point;//      = new Point( 0, 0 );	//constructor.
 	public var maxVelocity:Point;//   = new Point( 0, 0 );	//
 	public var gravity:Point;//       = new Point( 0, 0 );	//
-	public var solid:String = "solid";
+	public var solid:String = CollisionType.STATIC_SOLID;
 	
 	private var _onGround:Bool;
 	private var _onWall:Bool;
-	
-	public function PhysicsEntity( )
+    
+    public function new(x:Float, y:Float) 
 	{
-		_onGround = _onWall = false;
+        super( x, y );
+        
+        _onGround = _onWall = false;
 		
 		velocity = new Point( 0, 0 );
 		acceleration = new Point( 0, 0 );
 		friction = new Point( 0, 0 );
 		maxVelocity = new Point( 0, 0 );
 		gravity = new Point( 0, 0 );
-	}
+    }
 	
 	public function onGround( ):Bool { return _onGround; }
 	public function onWall( ):Bool { return _onWall; }

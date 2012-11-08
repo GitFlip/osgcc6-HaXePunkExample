@@ -5,8 +5,8 @@ import worlds.GameWorld;
 class Main extends Engine
 {
 
-	public static inline var kScreenWidth:Int = 640;
-	public static inline var kScreenHeight:Int = 480;
+	public static inline var kScreenWidth:Int = 1280;
+	public static inline var kScreenHeight:Int = 960;
 	public static inline var kFrameRate:Int = 60;
 	public static inline var kClearColor:Int = 0x333333;
 	public static inline var kProjectName:String = "HaxePunk";
@@ -27,7 +27,7 @@ class Main extends Engine
 		}
 #end
 		HXP.screen.color = kClearColor;
-		HXP.screen.scale = 2;
+		HXP.screen.scale = 4;
 		HXP.world = new GameWorld();
 	}
 
