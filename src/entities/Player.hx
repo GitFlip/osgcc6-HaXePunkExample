@@ -6,6 +6,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import com.matttuttle.PhysicsEntity;
 
 /**
  * ...
