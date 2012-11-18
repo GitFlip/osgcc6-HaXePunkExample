@@ -33,6 +33,8 @@ class Player extends PhysicsEntity
         Input.define("down", [Key.DOWN, Key.S]);
 		Input.define("change_color", [Key.SPACE]);
 		
+		
+		
 		gravity.y = 0.5;
         maxVelocity.y = 12;
         maxVelocity.x = 1.5;
@@ -63,6 +65,8 @@ class Player extends PhysicsEntity
 		{            
             acceleration.y = -gravity.y * maxVelocity.y;
 		}
+		
+		trace(Input.mouseX + "," + Input.mouseY);
     }
 	
 	//Set the animation based on 
@@ -88,5 +92,6 @@ class Player extends PhysicsEntity
 		handleInput();
         
         setAnimations( );
+		
     }
 }
